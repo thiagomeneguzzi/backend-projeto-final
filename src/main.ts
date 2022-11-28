@@ -11,11 +11,11 @@ async function bootstrap() {
     app.enableCors();
 
     const config = new DocumentBuilder()
-        .setTitle('YourPet')
-        .setDescription('The official API documentation')
+        .setTitle('Final Project')
+        .setDescription('The final Project API documentation')
         .setVersion('1.0')
-        .addTag('Users')
-        .addTag('Posts')
+        .addTag('User')
+        .addTag('Client')
         .build();
 
     const document = SwaggerModule.createDocument(app, config);

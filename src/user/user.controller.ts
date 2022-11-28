@@ -1,18 +1,25 @@
 import { Body, Controller, HttpException, Post } from '@nestjs/common';
-import { CreateUserDto } from './dtos/create-user.dto';
+import { UserDto } from './dtos/user.dto';
 import { UserEntity } from './entity/user.entity';
 import { UserService } from './user.service';
 import { Public } from '../auth/decorators/public.decorator';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-@Controller('client')
+@Controller('user')
+@ApiTags('Users')
+@ApiBearerAuth()
 export class UserController {
-    constructor(private readonly clientService: UserService) {}
+    constructor(private readonly userService: UserService) {}
+
+    @Public()
+    @Post('login')
+    async login(@Body() user: UserDto): Promise<String | HttpException> {
+        return this.userService.login(user);
+    }
 
     @Public()
     @Post()
-    async create(
-        @Body() client: CreateUserDto,
-    ): Promise<UserEntity | HttpException> {
-        return this.clientService.create(client);
+    async create(@Body() user: UserDto): Promise<UserEntity | HttpException> {
+        return this.userService.create(user);
     }
 }

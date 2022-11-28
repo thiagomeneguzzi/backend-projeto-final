@@ -6,20 +6,8 @@ export class UserEntity {
     id: string;
 
     @Column()
-    name: string;
-
-    @Column()
-    cpf: string;
-
-    @Column()
     email: string;
 
     @Column()
-    cep: string;
-
-    @Column()
-    address_number: number;
-
-    @Column()
-    complement: string;
+    password: string;
 }

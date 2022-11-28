@@ -6,6 +6,8 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ClientModule } from './client/client.module';
 import { ClientEntity } from './client/entity/client.entity';
+import { UserEntity } from './user/entity/user.entity';
+import { UserModule } from './user/user.module';
 
 @Module({
     imports: [
@@ -19,11 +21,12 @@ import { ClientEntity } from './client/entity/client.entity';
             username: 'root',
             password: 'admin',
             database: 'final_project',
-            entities: [ClientEntity],
+            entities: [ClientEntity, UserEntity],
             synchronize: true,
         }),
         AuthModule,
         ClientModule,
+        UserModule,
     ],
     controllers: [],
     providers: [
