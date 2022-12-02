@@ -6,7 +6,10 @@ import { UserDto } from '../user/dtos/user.dto';
 export class AuthService {
     constructor(private jwtService: JwtService) {}
 
-    public async generateJwt(user: UserDto): Promise<{ access_token: string }> {
+    public async generateJwt(user: {
+        id: string;
+        email: string;
+    }): Promise<{ access_token: string }> {
         return { access_token: this.jwtService.sign(user) };
     }
 

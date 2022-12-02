@@ -19,10 +19,3 @@ npm run build
 ```
 'type'(Jira tag issue): 'message'
 ```
-
-### FirebaseService admin config
-`Ask for the CREDENTIALS_FILE` 
-`At powershell type:`
-```
-$env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\<YOUR USERNAME>\...\yourpet-62230-firebase-adminsdk-orrvp-1b1d9ace3d.json"
-```

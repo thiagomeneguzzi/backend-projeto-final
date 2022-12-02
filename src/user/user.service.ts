@@ -18,7 +18,7 @@ export class UserService {
         user.password = crypto
             .pbkdf2Sync(
                 user.password,
-                process.env.password_hash,
+                process.env.PASSWORD_HASH,
                 1000,
                 64,
                 'sha512',
@@ -34,6 +34,7 @@ export class UserService {
                 HttpStatus.BAD_REQUEST,
             );
         } else {
+            delete createdUser.password;
             return createdUser;
         }
     }
@@ -59,7 +60,10 @@ export class UserService {
 
         let jwt;
         if (hash === userFound.password) {
-            jwt = await this.auth.generateJwt(user);
+            jwt = await this.auth.generateJwt({
+                id: userFound.id,
+                email: userFound.email,
+            });
             return jwt;
         } else {
             return new HttpException('wrong-password', HttpStatus.FORBIDDEN);

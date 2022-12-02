@@ -13,7 +13,7 @@ export class UserController {
 
     @Public()
     @Post('login')
-    async login(@Body() user: UserDto): Promise<String | HttpException> {
+    async login(@Body() user: UserDto): Promise<string | HttpException> {
         return this.userService.login(user);
     }
 
