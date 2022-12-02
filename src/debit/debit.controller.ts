@@ -1,18 +1,28 @@
-import { Body, Controller, HttpException, Post } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Get,
+    HttpException,
+    Param,
+    Post,
+} from '@nestjs/common';
 import { CreateDebitDto } from './dtos/create-debit.dto';
 import { DebitEntity } from './entity/debit.entity';
 import { DebitService } from './debit.service';
-import { Public } from '../auth/decorators/public.decorator';
 
-@Controller('client')
+@Controller('debit')
 export class DebitController {
-    constructor(private readonly clientService: DebitService) {}
+    constructor(private readonly debitService: DebitService) {}
 
-    @Public()
     @Post()
     async create(
-        @Body() client: CreateDebitDto,
+        @Body() debit: CreateDebitDto,
     ): Promise<DebitEntity | HttpException> {
-        return this.clientService.create(client);
+        return this.debitService.create(debit);
+    }
+
+    @Get()
+    async findAllById(@Param('id') id: string): Promise<DebitEntity[]> {
+        return this.debitService.findAllById(id);
     }
 }

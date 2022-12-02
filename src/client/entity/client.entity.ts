@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+    Column,
+    Entity,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
+} from 'typeorm';
+import { DebitEntity } from '../../debit/entity/debit.entity';
 
 @Entity()
 export class ClientEntity {
@@ -26,4 +33,7 @@ export class ClientEntity {
 
     @Column()
     complement: string;
+
+    @OneToMany(() => DebitEntity, (debit) => debit.client)
+    debits: DebitEntity[];
 }

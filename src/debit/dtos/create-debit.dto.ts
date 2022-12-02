@@ -1,24 +1,47 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+    IsBoolean,
+    IsNotEmpty,
+    IsNumber,
+    IsPositive,
+    IsString,
+} from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+
+export interface Client {
+    id: string;
+    name: string;
+    cpf: string;
+    email: string;
+    cep: string;
+    address_number: number;
+    complement: string;
+}
 
 export class CreateDebitDto {
     @IsNotEmpty()
-    @IsString()
-    name: string;
+    @ApiProperty()
+    client: Client;
+
+    @IsNotEmpty()
+    @IsNumber()
+    @IsPositive()
+    @ApiProperty()
+    value: number;
 
     @IsNotEmpty()
     @IsString()
-    cpf: string;
+    @ApiProperty()
+    description: string;
 
     @IsNotEmpty()
-    @IsEmail()
-    email: string;
-
-    @IsString()
-    cep: string;
+    @IsBoolean()
+    @ApiProperty()
+    status: boolean;
 
     @IsNumber()
-    address_number: number;
+    @ApiProperty()
+    process_number: number;
 
-    @IsString()
-    complement: string;
+    // @IsString()
+    // complement: string;
 }

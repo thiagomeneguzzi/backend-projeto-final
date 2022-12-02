@@ -8,25 +8,34 @@ import { CreateDebitDto } from './dtos/create-debit.dto';
 export class DebitService {
     constructor(
         @InjectRepository(DebitEntity)
-        private readonly clientRepo: Repository<DebitEntity>,
+        private readonly debitRepo: Repository<DebitEntity>,
     ) {}
 
-    async create(client: CreateDebitDto): Promise<DebitEntity | HttpException> {
-        const clientEntity = this.clientRepo.create(client);
+    async create(debit: CreateDebitDto): Promise<DebitEntity | HttpException> {
+        const debitEntity = this.debitRepo.create(debit);
 
-        const createdClient = await this.clientRepo.save(clientEntity);
-        if (!createdClient) {
+        const createdDebit = await this.debitRepo.save(debitEntity);
+        if (!createdDebit) {
             return new HttpException(
-                'create-client-error',
+                'create-debit-error',
                 HttpStatus.BAD_REQUEST,
             );
         } else {
-            return createdClient;
+            return createdDebit;
         }
     }
 
-    async findAll(): Promise<DebitEntity[]> {
-        return Promise.resolve(undefined);
+    async findAllById(id: string): Promise<DebitEntity[]> {
+        const debits = this.debitRepo.find({
+            where: {
+                id,
+            },
+            relations: {
+                client: true,
+            },
+        });
+
+        return debits;
     }
 
     async findById(): Promise<DebitEntity> {

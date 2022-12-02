@@ -28,18 +28,20 @@ export class ClientService {
     }
 
     async findAll(): Promise<ClientEntity[]> {
-        return Promise.resolve(undefined);
+        return this.clientRepo.find({
+            relations: {
+                debits: true,
+            },
+        });
     }
 
-    async findById(): Promise<ClientEntity> {
-        return Promise.resolve(undefined);
-    }
+    async delete(id: string): Promise<boolean | HttpException> {
+        const user = await this.clientRepo.findOneBy({ id });
+        if (!user) {
+            return new HttpException('client-not-found', HttpStatus.NOT_FOUND);
+        }
 
-    async update(): Promise<ClientEntity> {
-        return Promise.resolve(undefined);
-    }
-
-    async delete(): Promise<ClientEntity> {
-        return Promise.resolve(undefined);
+        await this.clientRepo.delete(user);
+        return true;
     }
 }

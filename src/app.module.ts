@@ -8,6 +8,8 @@ import { ClientModule } from './client/client.module';
 import { ClientEntity } from './client/entity/client.entity';
 import { UserEntity } from './user/entity/user.entity';
 import { UserModule } from './user/user.module';
+import { DebitEntity } from './debit/entity/debit.entity';
+import { DebitModule } from './debit/debit.module';
 
 @Module({
     imports: [
@@ -21,12 +23,13 @@ import { UserModule } from './user/user.module';
             username: 'root',
             password: 'admin',
             database: 'final_project',
-            entities: [ClientEntity, UserEntity],
+            entities: [ClientEntity, UserEntity, DebitEntity],
             synchronize: true,
         }),
         AuthModule,
         ClientModule,
         UserModule,
+        DebitModule,
     ],
     controllers: [],
     providers: [

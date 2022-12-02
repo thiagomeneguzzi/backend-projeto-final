@@ -1,25 +1,26 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { ClientEntity } from '../../client/entity/client.entity';
 
 @Entity()
 export class DebitEntity {
     @PrimaryGeneratedColumn()
     id: string;
 
-    @Column()
-    name: string;
+    @ManyToOne(() => ClientEntity, (client) => client.debits)
+    client: ClientEntity;
 
     @Column()
-    cpf: string;
+    value: number;
 
     @Column()
-    email: string;
+    description: string;
 
     @Column()
-    cep: string;
+    status: boolean;
 
     @Column()
-    address_number: number;
+    process_number: number;
 
-    @Column()
-    complement: string;
+    // @IsString()
+    // complement: string;
 }
