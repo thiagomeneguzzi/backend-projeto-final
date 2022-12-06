@@ -16,7 +16,7 @@ export class DebitEntity {
     description: string;
 
     @Column()
-    status: boolean;
+    status: string;
 
     @Column()
     process_number: number;

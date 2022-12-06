@@ -34,9 +34,9 @@ export class CreateDebitDto {
     description: string;
 
     @IsNotEmpty()
-    // @IsBoolean()
+    @IsString()
     @ApiProperty()
-    status: boolean;
+    status: string;
 
     // @IsNumber()
     @ApiProperty()
