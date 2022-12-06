@@ -14,8 +14,11 @@ import { DebitService } from './debit.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { FormDataRequest } from 'nestjs-form-data';
 import { diskStorage } from 'multer';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @Controller('debit')
+@ApiTags('Debit')
+@ApiBearerAuth()
 export class DebitController {
     constructor(private readonly debitService: DebitService) {}
 
@@ -40,7 +43,7 @@ export class DebitController {
         return this.debitService.create(debit);
     }
 
-    @Get()
+    @Get(':id')
     async findAllById(@Param('id') id: string): Promise<DebitEntity[]> {
         return this.debitService.findAllById(id);
     }
