@@ -23,8 +23,8 @@ export class CreateDebitDto {
     client: Client;
 
     @IsNotEmpty()
-    @IsNumber()
-    @IsPositive()
+    // @IsNumber()
+    // @IsPositive()
     @ApiProperty()
     value: number;
 
@@ -34,13 +34,16 @@ export class CreateDebitDto {
     description: string;
 
     @IsNotEmpty()
-    @IsBoolean()
+    // @IsBoolean()
     @ApiProperty()
     status: boolean;
 
-    @IsNumber()
+    // @IsNumber()
     @ApiProperty()
     process_number: number;
+
+    @ApiProperty()
+    filename: string;
 
     // @IsString()
     // complement: string;

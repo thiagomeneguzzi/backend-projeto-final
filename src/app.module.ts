@@ -10,6 +10,7 @@ import { UserEntity } from './user/entity/user.entity';
 import { UserModule } from './user/user.module';
 import { DebitEntity } from './debit/entity/debit.entity';
 import { DebitModule } from './debit/debit.module';
+import { MemoryStoredFile, NestjsFormDataModule } from 'nestjs-form-data';
 
 @Module({
     imports: [

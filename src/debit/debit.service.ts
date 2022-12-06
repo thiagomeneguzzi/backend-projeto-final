@@ -28,7 +28,9 @@ export class DebitService {
     async findAllById(id: string): Promise<DebitEntity[]> {
         const debits = this.debitRepo.find({
             where: {
-                id,
+                client: {
+                    id: id,
+                },
             },
             relations: {
                 client: true,
