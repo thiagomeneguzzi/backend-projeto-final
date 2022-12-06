@@ -1,10 +1,4 @@
-import {
-    IsBoolean,
-    IsNotEmpty,
-    IsNumber,
-    IsPositive,
-    IsString,
-} from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export interface Client {
@@ -20,13 +14,12 @@ export interface Client {
 export class CreateDebitDto {
     @IsNotEmpty()
     @ApiProperty()
-    client: Client;
+    client: string;
 
     @IsNotEmpty()
-    // @IsNumber()
-    // @IsPositive()
+    @IsString()
     @ApiProperty()
-    value: number;
+    value: string;
 
     @IsNotEmpty()
     @IsString()
@@ -38,13 +31,10 @@ export class CreateDebitDto {
     @ApiProperty()
     status: string;
 
-    // @IsNumber()
+    @IsString()
     @ApiProperty()
-    process_number: number;
+    process_number: string;
 
     @ApiProperty()
     filename: string;
-
-    // @IsString()
-    // complement: string;
 }

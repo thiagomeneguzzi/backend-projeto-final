@@ -2,7 +2,9 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DebitEntity } from './entity/debit.entity';
 import { Repository } from 'typeorm';
-import { CreateDebitDto } from './dtos/create-debit.dto';
+import { Client, CreateDebitDto } from './dtos/create-debit.dto';
+import { IsNotEmpty, IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Injectable()
 export class DebitService {
@@ -12,7 +14,16 @@ export class DebitService {
     ) {}
 
     async create(debit: CreateDebitDto): Promise<DebitEntity | HttpException> {
-        const debitEntity = this.debitRepo.create(debit);
+        const debitFormatted = {
+            client: JSON.parse(debit.client),
+            value: Number(debit.value),
+            description: debit.description,
+            status: debit.status,
+            process_number: Number(debit.process_number),
+            filename: debit.filename,
+        };
+
+        const debitEntity = this.debitRepo.create(debitFormatted);
 
         const createdDebit = await this.debitRepo.save(debitEntity);
         if (!createdDebit) {
