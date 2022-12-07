@@ -10,7 +10,6 @@ import { UserEntity } from './user/entity/user.entity';
 import { UserModule } from './user/user.module';
 import { DebitEntity } from './debit/entity/debit.entity';
 import { DebitModule } from './debit/debit.module';
-import { MemoryStoredFile, NestjsFormDataModule } from 'nestjs-form-data';
 
 @Module({
     imports: [
@@ -20,7 +19,7 @@ import { MemoryStoredFile, NestjsFormDataModule } from 'nestjs-form-data';
         TypeOrmModule.forRoot({
             type: 'mysql',
             host: 'localhost',
-            port: 3306,
+            port: 3307,
             username: 'root',
             password: 'admin',
             database: 'final_project',

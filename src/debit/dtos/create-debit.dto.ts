@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export interface Client {
@@ -36,10 +36,12 @@ export class CreateDebitDto {
     @ApiProperty()
     status: STATUS;
 
+    @IsOptional()
     @IsNumber()
     @ApiProperty()
     process_number: number;
 
+    @IsOptional()
     @IsString()
     @ApiProperty()
     filename: string;
