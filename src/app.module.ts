@@ -20,7 +20,7 @@ import { MemoryStoredFile, NestjsFormDataModule } from 'nestjs-form-data';
         TypeOrmModule.forRoot({
             type: 'mysql',
             host: 'localhost',
-            port: 3307,
+            port: 3306,
             username: 'root',
             password: 'admin',
             database: 'final_project',
