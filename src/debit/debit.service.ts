@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DebitEntity } from './entity/debit.entity';
 import { Repository } from 'typeorm';
 import { CreateDebitDto } from './dtos/create-debit.dto';
+import { UpdateDebitDto } from './dtos/update-debit.dto';
 
 @Injectable()
 export class DebitService {
@@ -36,5 +37,48 @@ export class DebitService {
                 client: true,
             },
         });
+    }
+
+    async delete(id: string): Promise<{ status: number } | HttpException> {
+        const debit = await this.debitRepo.findOneBy({ id });
+
+        if (!debit) {
+            return new HttpException(
+                'debit-doesnt-exist',
+                HttpStatus.NOT_FOUND,
+            );
+        }
+
+        await this.debitRepo.remove(debit);
+
+        return {
+            status: 204,
+        };
+    }
+
+    async update(
+        id: string,
+        body: UpdateDebitDto,
+    ): Promise<DebitEntity | HttpException> {
+        const debit = await this.debitRepo.findOneBy({ id });
+        if (!debit) {
+            return new HttpException(
+                'debit-doesnt-exist',
+                HttpStatus.NOT_FOUND,
+            );
+        }
+
+        await this.debitRepo.update({ id }, body);
+
+        const debitUpdated = await this.debitRepo.findOne({
+            where: {
+                id: id,
+            },
+            relations: {
+                client: true,
+            },
+        });
+
+        return debitUpdated;
     }
 }

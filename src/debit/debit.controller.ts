@@ -1,10 +1,12 @@
 import {
     Body,
     Controller,
+    Delete,
     Get,
     HttpException,
     Param,
     Post,
+    Put,
     UploadedFile,
     UseInterceptors,
 } from '@nestjs/common';
@@ -15,6 +17,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Public } from '../auth/decorators/public.decorator';
+import { UpdateDebitDto } from './dtos/update-debit.dto';
 
 @Controller('debit')
 @ApiTags('Debit')
@@ -52,5 +55,20 @@ export class DebitController {
     @Get(':id')
     async findAllById(@Param('id') id: string): Promise<DebitEntity[]> {
         return this.debitService.findAllById(id);
+    }
+
+    @Put(':id')
+    async update(
+        @Param('id') id: string,
+        @Body() body: UpdateDebitDto,
+    ): Promise<DebitEntity | HttpException> {
+        return this.debitService.update(id, body);
+    }
+
+    @Delete(':id')
+    async delete(
+        @Param('id') id: string,
+    ): Promise<{ status: number } | HttpException> {
+        return this.debitService.delete(id);
     }
 }
