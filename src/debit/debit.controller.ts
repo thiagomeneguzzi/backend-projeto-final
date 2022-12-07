@@ -12,7 +12,6 @@ import { CreateDebitDto } from './dtos/create-debit.dto';
 import { DebitEntity } from './entity/debit.entity';
 import { DebitService } from './debit.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { FormDataRequest } from 'nestjs-form-data';
 import { diskStorage } from 'multer';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
@@ -23,6 +22,13 @@ export class DebitController {
     constructor(private readonly debitService: DebitService) {}
 
     @Post()
+    async create(
+        @Body() debit: CreateDebitDto,
+    ): Promise<DebitEntity | HttpException> {
+        return this.debitService.create(debit);
+    }
+
+    @Post('upload')
     @UseInterceptors(
         FileInterceptor('file', {
             storage: diskStorage({
@@ -35,12 +41,10 @@ export class DebitController {
             }),
         }),
     )
-    async create(
-        @UploadedFile() file: Express.Multer.File,
-        @Body() debit: CreateDebitDto,
-    ): Promise<DebitEntity | HttpException> {
-        debit.filename = file.filename;
-        return this.debitService.create(debit);
+    async upload(@UploadedFile() file: Express.Multer.File): Promise<{
+        filename: string;
+    }> {
+        return { filename: file.filename };
     }
 
     @Get(':id')

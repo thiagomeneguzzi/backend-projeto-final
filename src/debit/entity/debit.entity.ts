@@ -1,5 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { ClientEntity } from '../../client/entity/client.entity';
+import { STATUS } from '../dtos/create-debit.dto';
 
 @Entity()
 export class DebitEntity {
@@ -16,14 +17,15 @@ export class DebitEntity {
     description: string;
 
     @Column()
-    status: string;
+    status: STATUS;
 
-    @Column()
+    @Column({
+        nullable: true,
+    })
     process_number: number;
 
-    @Column()
+    @Column({
+        nullable: true,
+    })
     filename: string;
-
-    // @IsString()
-    // complement: string;
 }

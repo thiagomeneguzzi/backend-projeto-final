@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export interface Client {
@@ -11,15 +11,20 @@ export interface Client {
     complement: string;
 }
 
+export enum STATUS {
+    PENDING,
+    PAID,
+}
+
 export class CreateDebitDto {
     @IsNotEmpty()
     @ApiProperty()
-    client: string;
+    client: Client;
 
     @IsNotEmpty()
-    @IsString()
+    @IsNumber()
     @ApiProperty()
-    value: string;
+    value: number;
 
     @IsNotEmpty()
     @IsString()
@@ -27,14 +32,15 @@ export class CreateDebitDto {
     description: string;
 
     @IsNotEmpty()
-    @IsString()
+    @IsNumber()
     @ApiProperty()
-    status: string;
+    status: STATUS;
+
+    @IsNumber()
+    @ApiProperty()
+    process_number: number;
 
     @IsString()
-    @ApiProperty()
-    process_number: string;
-
     @ApiProperty()
     filename: string;
 }
