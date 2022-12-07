@@ -20,7 +20,6 @@ export class DebitService {
             description: debit.description,
             status: debit.status,
             process_number: Number(debit.process_number),
-            filename: debit.filename,
         };
 
         const debitEntity = this.debitRepo.create(debitFormatted);

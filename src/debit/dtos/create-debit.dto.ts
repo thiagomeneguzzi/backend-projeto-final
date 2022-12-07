@@ -34,7 +34,4 @@ export class CreateDebitDto {
     @IsString()
     @ApiProperty()
     process_number: string;
-
-    @ApiProperty()
-    filename: string;
 }

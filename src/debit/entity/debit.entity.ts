@@ -21,9 +21,6 @@ export class DebitEntity {
     @Column()
     process_number: number;
 
-    @Column()
-    filename: string;
-
     // @IsString()
     // complement: string;
 }

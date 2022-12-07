@@ -23,23 +23,9 @@ export class DebitController {
     constructor(private readonly debitService: DebitService) {}
 
     @Post()
-    @UseInterceptors(
-        FileInterceptor('file', {
-            storage: diskStorage({
-                destination: './uploads',
-                filename: (req, file, cb) => {
-                    const fileNameSplit = file.originalname.split('.');
-                    const fileExt = fileNameSplit[fileNameSplit.length - 1];
-                    cb(null, `${Date.now()}.${fileExt}`);
-                },
-            }),
-        }),
-    )
     async create(
-        @UploadedFile() file: Express.Multer.File,
         @Body() debit: CreateDebitDto,
     ): Promise<DebitEntity | HttpException> {
-        debit.filename = file.filename;
         return this.debitService.create(debit);
     }
 
