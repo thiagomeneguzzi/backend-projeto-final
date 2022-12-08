@@ -26,6 +26,14 @@ export class DebitService {
         }
     }
 
+    async findAll(): Promise<DebitEntity[]> {
+        return this.debitRepo.find({
+            relations: {
+                client: true,
+            },
+        });
+    }
+
     async findAllById(id: string): Promise<DebitEntity[]> {
         return this.debitRepo.find({
             where: {

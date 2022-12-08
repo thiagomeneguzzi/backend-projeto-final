@@ -50,6 +50,11 @@ export class DebitController {
         return { filename: file.filename };
     }
 
+    @Get()
+    async findAll(): Promise<DebitEntity[]> {
+        return this.debitService.findAll();
+    }
+
     @Get(':id')
     async findAllById(@Param('id') id: string): Promise<DebitEntity[]> {
         return this.debitService.findAllById(id);
