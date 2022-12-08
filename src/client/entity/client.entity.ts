@@ -25,13 +25,19 @@ export class ClientEntity {
     })
     email: string;
 
-    @Column()
+    @Column({
+        nullable: true,
+    })
     cep: string;
 
-    @Column()
+    @Column({
+        nullable: true,
+    })
     address_number: number;
 
-    @Column()
+    @Column({
+        nullable: true,
+    })
     complement: string;
 
     @OneToMany(() => DebitEntity, (debit) => debit.client)

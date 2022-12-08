@@ -1,4 +1,10 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+    IsEmail,
+    IsNotEmpty,
+    IsNumber,
+    IsOptional,
+    IsString,
+} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateClientDto {
@@ -17,14 +23,17 @@ export class CreateClientDto {
     @ApiProperty()
     email: string;
 
+    @IsOptional()
     @IsString()
     @ApiProperty()
     cep: string;
 
+    @IsOptional()
     @IsNumber()
     @ApiProperty()
     address_number: number;
 
+    @IsOptional()
     @IsString()
     @ApiProperty()
     complement: string;
