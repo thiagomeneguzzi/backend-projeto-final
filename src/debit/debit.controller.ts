@@ -16,7 +16,6 @@ import { DebitService } from './debit.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { Public } from '../auth/decorators/public.decorator';
 import { UpdateDebitDto } from './dtos/update-debit.dto';
 
 @Controller('debit')
@@ -32,7 +31,6 @@ export class DebitController {
         return this.debitService.create(debit);
     }
 
-    @Public()
     @Post('upload')
     @UseInterceptors(
         FileInterceptor('file', {
