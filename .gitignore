@@ -33,6 +33,3 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-
-.env
-yourpet-62230-firebase-adminsdk-orrvp-1b1d9ace3d.json
